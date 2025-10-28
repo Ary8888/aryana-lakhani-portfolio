@@ -1,251 +1,185 @@
-<!--
-  Aryana Lakhani — Art Portfolio (single-file HTML for GitHub Pages)
-  Instructions:
-  1. Save this file as `index.html` in a new GitHub repo named `aryana.github.io` (or any repo and enable Pages).
-  2. No need to upload images since URLs are external (Postimages links). If you prefer to host images in the repo, replace the src values with `/images/yourfile.jpg` and upload files to an /images folder.
-  3. Commit and push. In repo settings > Pages, set the source to main branch / root and your site will publish at https://aryana.github.io or https://<your-username>.github.io/<repo>.
--->
-
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aryana Lakhani • Art Portfolio</title>
-  <style>
-    :root{
-      --bg1: #ff9a9e; /* warm gradient */
-      --bg2: #fecfef;
-      --accent: rgba(255,255,255,0.85);
-      --card-bg: rgba(255,255,255,0.06);
-      --glass: rgba(255,255,255,0.08);
-      --text: #1b1b1b;
-      --muted: rgba(27,27,27,0.6);
-      --radius: 16px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      color:var(--text);
-      background: linear-gradient(135deg,var(--bg1),var(--bg2));
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:48px 24px;
-      display:flex;
-      justify-content:center;
-    }
-    .container{
-      width:100%;
-      max-width:1100px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aryana Lakhani • Art Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin:0;
+    font-family:'Inter', sans-serif;
+    background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    padding:50px 20px;
+  }
 
-    header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      margin-bottom:28px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:16px
-    }
-    .logo{
-      width:64px;height:64px;border-radius:12px;background:linear-gradient(160deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06));
-      display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:22px;box-shadow:0 6px 20px rgba(0,0,0,0.08);
-      backdrop-filter: blur(6px);
-    }
-    h1{margin:0;font-size:22px;color:white}
-    p.lead{margin:0;color:var(--accent);opacity:0.95}
+  .gallery {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    max-width:1100px;
+    width:100%;
+  }
 
-    .bio{
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-      padding:18px;border-radius:12px;box-shadow:0 6px 30px rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;gap:20px;
-    }
-    .bio .left{max-width:70%}
-    .bio small{display:block;color:var(--accent);opacity:0.9;margin-top:8px}
-    .cta{
-      display:flex;gap:8px;align-items:center
-    }
-    .btn{
-      padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.12);color:white;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,0.06)
-    }
+  .card {
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+    min-height:240px;
+    box-shadow:0 12px 35px rgba(0,0,0,0.2);
+    transition: transform 0.45s cubic-bezier(.25,.8,.25,1), box-shadow 0.45s ease;
+    cursor: pointer;
+  }
 
-    /* Gallery */
-    .gallery{
-      margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
-    }
-    .card{
-      position:relative;overflow:hidden;border-radius:14px;min-height:220px;display:flex;align-items:flex-end;justify-content:flex-start;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
-      transition:transform .45s cubic-bezier(.2,.9,.2,1), box-shadow .3s;
-      box-shadow:0 10px 30px rgba(11,8,17,0.12);
-    }
-    .card:hover{transform:translateY(-8px);box-shadow:0 24px 50px rgba(11,8,17,0.16)}
-    .card img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;left:0;top:0}
-    .overlay{
-      position:relative;z-index:2;padding:18px;background:linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.15));backdrop-filter: blur(4px);width:100%;transform:translateY(42%);transition:transform .35s ease, opacity .35s ease;opacity:0;
-    }
-    .card:hover .overlay{transform:translateY(0);opacity:1}
-    .title{color:white;font-weight:700;margin:0 0 6px;font-size:16px}
-    .desc{color:rgba(255,255,255,0.92);margin:0;font-size:13px;line-height:1.25}
+  .card:hover { 
+    transform:translateY(-8px) scale(1.02); 
+    box-shadow:0 28px 60px rgba(0,0,0,0.35); 
+  }
 
-    /* Responsive */
-    @media(max-width:960px){
-      .gallery{grid-template-columns:repeat(2,1fr)}
-    }
-    @media(max-width:600px){
-      header{flex-direction:column;align-items:flex-start}
-      .bio .left{max-width:100%}
-      .gallery{grid-template-columns:1fr}
-      .logo{width:56px;height:56px}
-    }
+  .card img { 
+    width:100%; 
+    height:100%; 
+    object-fit:cover; 
+    display:block; 
+    transition: transform 0.45s ease;
+  }
 
-    footer{margin-top:28px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;font-size:13px}
-    a.insta{color:white;text-decoration:none;font-weight:700}
+  .card:hover img { 
+    transform: scale(1.05); 
+  }
 
-    /* subtle entrance */
-    .fade-up{opacity:0;transform:translateY(18px);animation:fadeUp .7s forwards}
-    .fade-up.delay{animation-delay:0.12s}
-    @keyframes fadeUp{to{opacity:1;transform:none}}
-  </style>
+  .overlay {
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    color:#fff;
+    padding:18px;
+    font-size:15px;
+    line-height:1.4;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    transform: translateY(50%);
+    opacity:0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .card:hover .overlay { 
+    transform: translateY(0); 
+    opacity:1; 
+  }
+
+  .title { 
+    font-family:'Playfair Display', serif; 
+    font-weight:700; 
+    margin:0 0 8px; 
+    font-size:18px; 
+    letter-spacing:0.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+
+  @media(max-width:960px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+  @media(max-width:600px){ .gallery{ grid-template-columns:1fr; } }
+
+</style>
 </head>
 <body>
-  <div class="container">
-    <header class="fade-up">
-      <div class="brand">
-        <div class="logo">AL</div>
-        <div>
-          <h1>Aryana Lakhani</h1>
-          <p class="lead">I’m Aryana, a student passionate about art, engineering, and using design to build meaningful solutions.</p>
-        </div>
-      </div>
-      <nav class="fade-up delay">
-        <a class="btn" href="#gallery">Portfolio</a>
-        <a class="btn" href="#contact">Contact</a>
-      </nav>
-    </header>
+<div class="gallery">
 
-    <section class="bio fade-up" style="margin-top:18px">
-      <div class="left">
-        <strong style="color:white">Art portfolio & contact</strong>
-        <small>Works include paintings, sketches, and clay pieces that explore identity, structure, and form. Click any image to read a quick note on the piece.</small>
-      </div>
-      <div class="cta">
-        <a class="btn" id="viewAll" href="#gallery">View Works</a>
-        <a class="btn" id="instaBtn" href="https://instagram.com/aryana_lakhani" target="_blank">@aryana_lakhani</a>
-      </div>
-    </section>
+<!-- 1 -->
+<article class="card">
+<img src="https://i.postimg.cc/Jz0V4KJj/1.jpg" alt="Graphite Sketch of an Old Man">
+<div class="overlay">
+  <h3 class="title">Graphite Sketch</h3>
+  <p>Graphite sketch of an old man on textured paper, with detailed shading and hatching.</p>
+</div>
+</article>
 
-    <!-- Gallery -->
-    <main id="gallery" class="gallery fade-up" style="animation-delay:0.18s">
+<!-- 2 -->
+<article class="card">
+<img src="https://i.postimg.cc/yYS04CpB/unnamed-1.png" alt="Triptych Photographs">
+<div class="overlay">
+  <h3 class="title">Triptych Photos</h3>
+  <p>Triptych of photographs arranged together to form a cohesive sequence.</p>
+</div>
+</article>
 
-      <!-- Card 1 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/JncdQBZ1/Full-Size-Render-jpeg.avif" alt="Golden Reflection">
-        <div class="overlay">
-          <h3 class="title">Golden Reflection</h3>
-          <p class="desc">An acrylic study of light and identity — bold strokes that hold on to memory and glow through texture.</p>
-        </div>
-      </article>
+<!-- 3 -->
+<article class="card">
+<img src="https://i.postimg.cc/xjNPYmqZ/unnamed-3.png" alt="Graphite Sketch of Bottles">
+<div class="overlay">
+  <h3 class="title">Still Life Bottles</h3>
+  <p>Graphite sketch of bottles using a still reference; attention to proportion and shading.</p>
+</div>
+</article>
 
-      <!-- Card 2 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/yYS04CpB/unnamed-1.png" alt="Structura">
-        <div class="overlay">
-          <h3 class="title">Structura</h3>
-          <p class="desc">Digital render inspired by architectural lines — clean geometry meeting instinctive composition.</p>
-        </div>
-      </article>
+<!-- 4 -->
+<article class="card">
+<img src="https://i.postimg.cc/1XD6FpqK/unnamed-4.png" alt="Watercolor Skateboard Painting">
+<div class="overlay">
+  <h3 class="title">Watercolor Skateboard</h3>
+  <p>Watercolor painting of a skateboard based on my own photograph; layered washes and color blending.</p>
+</div>
+</article>
 
-      <!-- Card 3 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/xjNPYmqZ/unnamed-3.png" alt="Quiet Lines">
-        <div class="overlay">
-          <h3 class="title">Quiet Lines</h3>
-          <p class="desc">A graphite sketch that captures a quiet moment — minimal marks, maximum feeling.</p>
-        </div>
-      </article>
+<!-- 5 -->
+<article class="card">
+<img src="https://i.postimg.cc/kMWtfv2W/unnamed-5.png" alt="Clay Cylinder Container">
+<div class="overlay">
+  <h3 class="title">Clay Cylinder</h3>
+  <p>Clay cylinder container with floral designs; hand-sculpted and textured for contrast.</p>
+</div>
+</article>
 
-      <!-- Card 4 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/1XD6FpqK/unnamed-4.png" alt="Clay Echo">
-        <div class="overlay">
-          <h3 class="title">Clay Echo</h3>
-          <p class="desc">Hand-formed clay piece that keeps fingerprints and memories — tactile, imperfect, honest.</p>
-        </div>
-      </article>
+<!-- 6 -->
+<article class="card">
+<img src="https://i.postimg.cc/VNSJMqyL/unnamed-6.png" alt="Self Portrait with Acrylics">
+<div class="overlay">
+  <h3 class="title">Self Portrait</h3>
+  <p>Self-portrait using acrylic paint with my own carved stamps as the background.</p>
+</div>
+</article>
 
-      <!-- Card 5 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/kMWtfv2W/unnamed-5.png" alt="Urban Pulse">
-        <div class="overlay">
-          <h3 class="title">Urban Pulse</h3>
-          <p class="desc">Mixed-media riff on city geometry and rhythm — contrast, motion, and edges that speak.</p>
-        </div>
-      </article>
+<!-- 7 -->
+<article class="card">
+<img src="https://i.postimg.cc/659TzJJX/unnamed.jpg" alt="Graphite Sketch of an Old Woman">
+<div class="overlay">
+  <h3 class="title">Graphite Sketch</h3>
+  <p>Detailed graphite sketch of an old woman on textured paper, highlighting facial features.</p>
+</div>
+</article>
 
-      <!-- Card 6 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/VNSJMqyL/unnamed-6.png" alt="Fragmented Self">
-        <div class="overlay">
-          <h3 class="title">Fragmented Self</h3>
-          <p class="desc">A collage-style piece mapping moods and pieces of self — fractured, layered, unapologetic.</p>
-        </div>
-      </article>
+<!-- 8 -->
+<article class="card">
+<img src="https://i.postimg.cc/JD0qr0pg" alt="Oil Painting Reference Abstract">
+<div class="overlay">
+  <h3 class="title">Oil Painting</h3>
+  <p>Oil painting based on a reference with an abstract background; rich texture and color layering.</p>
+</div>
+</article>
 
-      <!-- Card 7 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/659TzJJX/unnamed.jpg" alt="Tension & Curve">
-        <div class="overlay">
-          <h3 class="title">Tension & Curve</h3>
-          <p class="desc">A study of balance: curves and tension working together to form structure and grace.</p>
-        </div>
-      </article>
+<!-- 9 -->
+<article class="card">
+<img src="https://i.postimg.cc/zG4Js4MJ/unnamed-2.jpg" alt="Oil Painting of Fruits">
+<div class="overlay">
+  <h3 class="title">Oil Fruits</h3>
+  <p>Oil painting of fruits; attention to color blending, light, and shading for dimensionality.</p>
+</div>
+</article>
 
-      <!-- Card 8 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/fLnR91jv/unnamed-1.jpg" alt="Threaded Memory">
-        <div class="overlay">
-          <h3 class="title">Threaded Memory</h3>
-          <p class="desc">An ink-forward sketch that layers marks like memories—rough, direct, and intentional.</p>
-        </div>
-      </article>
+<!-- 10 -->
+<article class="card">
+<img src="https://i.postimg.cc/44wXfYM2/unnamed-3.jpg" alt="Pen Sketch of Best Friend">
+<div class="overlay">
+  <h3 class="title">Pen Sketch</h3>
+  <p>Pen sketch of my best friend; detailed line work captures expression and form.</p>
+</div>
+</article>
 
-      <!-- Card 9 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/zG4Js4MJ/unnamed-2.jpg" alt="Surface Study">
-        <div class="overlay">
-          <h3 class="title">Surface Study</h3>
-          <p class="desc">Texture exploration from clay and glaze — a close look at how light reads surface.</p>
-        </div>
-      </article>
-
-      <!-- Card 10 -->
-      <article class="card">
-        <img src="https://i.postimg.cc/44wXfYM2/unnamed-3.jpg" alt="Blueprints of Me">
-        <div class="overlay">
-          <h3 class="title">Blueprints of Me</h3>
-          <p class="desc">Digital composition merging sketches and plans — a blueprint that maps identity and intent.</p>
-        </div>
-      </article>
-
-    </main>
-
-    <footer id="contact" class="fade-up" style="animation-delay:0.24s">
-      <div>Built by <strong>Aryana Lakhani</strong> • bold, expressive, and real.</div>
-      <div>Instagram • <a class="insta" href="https://instagram.com/aryana_lakhani" target="_blank">@aryana_lakhani</a></div>
-    </footer>
-  </div>
-
-  <script>
-    // small JS: open image in new tab when clicked (nice for reviewers)
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', e => {
-        const img = card.querySelector('img');
-        if(img && img.src) window.open(img.src, '_blank');
-      })
-    })
-  </script>
+</div>
 </body>
 </html>
