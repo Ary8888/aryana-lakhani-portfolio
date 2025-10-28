@@ -6,89 +6,61 @@
 <title>Aryana Lakhani • Art Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin:0;
-    font-family:'Inter', sans-serif;
-    background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    padding:50px 20px;
+  :root{
+    --bg-color:#1c1c1c;
+    --accent:#f2f2f2;
+    --card-bg:rgba(255,255,255,0.05);
+    --text:#fff;
+    --muted:rgba(255,255,255,0.7);
+    --radius:16px;
   }
 
-  .gallery {
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-    max-width:1100px;
-    width:100%;
-  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:'Inter',sans-serif;background:linear-gradient(145deg,#2a2a2a,#1c1c1c);color:var(--text);padding:40px 20px;display:flex;justify-content:center;}
+  .container{width:100%;max-width:1100px;}
 
-  .card {
-    position:relative;
-    border-radius:16px;
-    overflow:hidden;
-    min-height:240px;
-    box-shadow:0 12px 35px rgba(0,0,0,0.2);
-    transition: transform 0.45s cubic-bezier(.25,.8,.25,1), box-shadow 0.45s ease;
-    cursor: pointer;
-  }
+  header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px;flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:16px;}
+  .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(160deg, rgba(255,255,255,0.2), rgba(255,255,255,0.06));display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:22px;box-shadow:0 6px 20px rgba(0,0,0,0.08);backdrop-filter: blur(6px);}
+  h1{margin:0;font-family:'Playfair Display', serif;font-size:28px;color:var(--text);}
+  p.lead{margin:0;color:var(--accent);opacity:0.9;font-size:16px;}
 
-  .card:hover { 
-    transform:translateY(-8px) scale(1.02); 
-    box-shadow:0 28px 60px rgba(0,0,0,0.35); 
-  }
+  nav a{padding:10px 14px;border-radius:10px;background:rgba(255,255,255,0.12);color:white;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(255,255,255,0.06);margin-left:8px;}
 
-  .card img { 
-    width:100%; 
-    height:100%; 
-    object-fit:cover; 
-    display:block; 
-    transition: transform 0.45s ease;
-  }
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;}
+  .card{position:relative;border-radius:16px;overflow:hidden;min-height:240px;box-shadow:0 12px 35px rgba(0,0,0,0.2);transition: transform 0.45s cubic-bezier(.25,.8,.25,1), box-shadow 0.45s ease;cursor:pointer;}
+  .card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 28px 60px rgba(0,0,0,0.35);}
+  .card img{width:100%;height:100%;object-fit:cover;display:block;transition: transform 0.45s ease;}
+  .card:hover img{transform:scale(1.05);}
+  .overlay{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);color:#fff;padding:18px;font-size:15px;line-height:1.4;transition: transform 0.4s ease, opacity 0.4s ease;transform: translateY(50%);opacity:0;border-top:1px solid rgba(255,255,255,0.1);}
+  .card:hover .overlay{transform:translateY(0);opacity:1;}
+  .title{font-family:'Playfair Display', serif;font-weight:700;margin:0 0 8px;font-size:18px;letter-spacing:0.5px;text-shadow:1px 1px 2px rgba(0,0,0,0.5);}
 
-  .card:hover img { 
-    transform: scale(1.05); 
-  }
+  @media(max-width:960px){.gallery{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.gallery{grid-template-columns:1fr;}header{justify-content:center;flex-direction:column;align-items:center;}}
 
-  .overlay {
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(6px);
-    color:#fff;
-    padding:18px;
-    font-size:15px;
-    line-height:1.4;
-    transition: transform 0.4s ease, opacity 0.4s ease;
-    transform: translateY(50%);
-    opacity:0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .card:hover .overlay { 
-    transform: translateY(0); 
-    opacity:1; 
-  }
-
-  .title { 
-    font-family:'Playfair Display', serif; 
-    font-weight:700; 
-    margin:0 0 8px; 
-    font-size:18px; 
-    letter-spacing:0.5px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  }
-
-  @media(max-width:960px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
-  @media(max-width:600px){ .gallery{ grid-template-columns:1fr; } }
-
+  footer{margin-top:32px;color:var(--muted);display:flex;justify-content:center;font-size:13px;}
+  footer a{color:white;font-weight:700;text-decoration:none;margin-left:6px;}
 </style>
 </head>
 <body>
-<div class="gallery">
+<div class="container">
+
+<header>
+  <div class="brand">
+    <div class="logo">AL</div>
+    <div>
+      <h1>Aryana Lakhani</h1>
+      <p class="lead">Student passionate about art, painting, and creative design.</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#gallery">Portfolio</a>
+    <a href="https://instagram.com/aryana_lakhani" target="_blank">@aryana_lakhani</a>
+  </nav>
+</header>
+
+<main id="gallery" class="gallery">
 
 <!-- 1 -->
 <article class="card">
@@ -179,6 +151,12 @@
   <p>Pen sketch of my best friend; detailed line work captures expression and form.</p>
 </div>
 </article>
+
+</main>
+
+<footer>
+  Follow me on Instagram: <a href="https://instagram.com/aryana_lakhani" target="_blank">@aryana_lakhani</a>
+</footer>
 
 </div>
 </body>
